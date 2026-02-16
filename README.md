@@ -73,6 +73,7 @@ It must never depend on DroneEngage internals.
 
 ### 3.4 Dashboard
 
+- Implemented at `GET /` (served from `app/static/index.html`)
 - Simple, reliable map UI
 - Shows:
   - all drones
@@ -212,6 +213,8 @@ With Docker Compose (api + redis):
 ```bash
 docker compose up --build
 ```
+- `docker-compose.yml` provides local `api` + `redis` services.
+
 
 Without Docker:
 ```bash

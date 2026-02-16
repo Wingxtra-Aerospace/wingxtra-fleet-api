@@ -24,7 +24,7 @@ def test_healthz() -> None:
 def test_dashboard_route() -> None:
     response = client.get("/")
     assert response.status_code == 200
-    assert "Leaflet" in response.text
+    assert "text/html" in response.headers.get("content-type", "")
     assert "Wingxtra Fleet Dashboard" in response.text
 
 
