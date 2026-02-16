@@ -129,9 +129,9 @@ alt_m: −500 to 20000
 
 remaining_pct: 0–100
 
-Missing optional sections are allowed ```
+Missing optional sections are allowed
 
-5. Storage model (MVP)
+## 5. Storage model (MVP)
 Redis (required)
 Key: latest:{drone_id}
 
@@ -148,7 +148,7 @@ Time-series telemetry history (downsampled)
 
 Drone registry table (name, type, notes)
 
-6. API specification
+## 6. API specification
 POST /api/v1/telemetry
 Headers:
 
@@ -178,7 +178,7 @@ Returns:
     }
   ]
 }
-7. Technology choices (recommended)
+## 7. Technology choices (recommended)
 Preferred stack (do not improvise):
 
 FastAPI (Python)
@@ -191,7 +191,7 @@ Docker for deployment
 
 Codex should not switch stacks unless explicitly instructed.
 
-8. Local development
+## 8. Local development
 Environment variables
 Required:
 
@@ -207,7 +207,7 @@ docker compose up --build
 or without Docker:
 
 uvicorn app.main:app --reload --port 8000
-9. Dashboard requirements (explicit)
+## 9. Dashboard requirements (explicit)
 Uses Leaflet or Mapbox
 
 Polls /api/v1/telemetry/latest every 1–3s
@@ -221,7 +221,7 @@ Mobile friendly
 This is not a FleetShare clone.
 Correctness > styling.
 
-10. Acceptance tests (must pass)
+## 10. Acceptance tests (must pass)
 Start backend
 
 POST telemetry for:
@@ -236,7 +236,7 @@ Both drones appear
 
 Map renders both markers
 
-11. What NOT to do
+## 11. What NOT to do
 ❌ Do not require a laptop bridge
 
 ❌ Do not store only history without latest cache
@@ -245,7 +245,7 @@ Map renders both markers
 
 ❌ Do not depend on DroneEngage repos
 
-12. Phase roadmap (locked)
+## 12. Phase roadmap (locked)
 Phase 1 (MVP)
 Ingest + latest
 
