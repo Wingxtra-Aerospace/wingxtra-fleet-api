@@ -15,6 +15,19 @@ VALID_PAYLOAD = {
 }
 
 
+def test_healthz() -> None:
+    response = client.get("/healthz")
+    assert response.status_code == 200
+    assert response.json() == {"status": "ok"}
+
+
+def test_dashboard_route() -> None:
+    response = client.get("/")
+    assert response.status_code == 200
+    assert "Leaflet" in response.text
+    assert "Wingxtra Fleet Dashboard" in response.text
+
+
 def test_rejects_invalid_api_key() -> None:
     response = client.post("/api/v1/telemetry", json=VALID_PAYLOAD, headers={"X-API-Key": "bad"})
     assert response.status_code == 401

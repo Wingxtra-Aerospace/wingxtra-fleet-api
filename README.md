@@ -67,7 +67,12 @@ It must never depend on DroneEngage internals.
 - Returns **latest telemetry per drone_id**
 - Must be fast enough for map refresh every 1–3 seconds
 
-### 3.3 Dashboard
+### 3.3 Health checks
+- Endpoint: `GET /healthz`
+- Returns `{"status":"ok"}` for uptime probes (Render/health monitors)
+
+### 3.4 Dashboard
+
 - Simple, reliable map UI
 - Shows:
   - all drones
@@ -202,10 +207,16 @@ RATE_LIMIT_RPS=10
 LOG_LEVEL=INFO
 ALLOWED_ORIGINS=http://localhost:3000
 Run locally
-docker compose up --build
-or without Docker:
 
+With Docker Compose (api + redis):
+```bash
+docker compose up --build
+```
+
+Without Docker:
+```bash
 uvicorn app.main:app --reload --port 8000
+```
 ## 9. Dashboard requirements (explicit)
 Uses Leaflet or Mapbox
 
@@ -271,7 +282,7 @@ Operator accounts
 
 ---
 
-## 10. Real-world readiness notes
+## 14. Real-world readiness notes
 
 Yes—this architecture is suitable for real-world use when deployed with proper operations controls.
 
@@ -287,3 +298,10 @@ To run it in production safely, add:
 - ingress rate limiting + WAF
 - Redis persistence/replication and monitoring
 - structured logging/metrics/alerts
+
+
+## 13. Implemented endpoints in this repo
+- `GET /healthz` → `{"status":"ok"}`
+- `GET /` → minimal Leaflet dashboard (map + table) polling `GET /api/v1/telemetry/latest` every 2 seconds
+- `POST /api/v1/telemetry` → ingest with `X-API-Key`
+- `GET /api/v1/telemetry/latest` → latest state per drone

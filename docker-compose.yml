@@ -1,0 +1,21 @@
+services:
+  api:
+    image: python:3.11-slim
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      API_KEY: ${API_KEY:-dev_secret}
+      REDIS_URL: redis://redis:6379/0
+    command: >-
+      sh -c "pip install --no-cache-dir -r requirements.txt &&
+      uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
