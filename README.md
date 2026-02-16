@@ -129,7 +129,7 @@ alt_m: −500 to 20000
 
 remaining_pct: 0–100
 
-Missing optional sections are allowed
+Missing optional sections are allowed ```
 
 5. Storage model (MVP)
 Redis (required)
