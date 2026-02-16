@@ -268,3 +268,22 @@ Playback
 
 Operator accounts
 
+
+---
+
+## 10. Real-world readiness notes
+
+Yes—this architecture is suitable for real-world use when deployed with proper operations controls.
+
+This repository now includes an MVP FastAPI receiver implementation with:
+- `POST /api/v1/telemetry` (API-key protected)
+- `GET /api/v1/telemetry/latest` (latest state per drone)
+- Canonical payload validation for `drone_id`, coordinates, and battery constraints
+- Redis-backed latest-state storage (with in-memory fallback for local dev/testing)
+
+To run it in production safely, add:
+- TLS termination (Nginx/Cloud load balancer)
+- per-drone API keys or signed tokens
+- ingress rate limiting + WAF
+- Redis persistence/replication and monitoring
+- structured logging/metrics/alerts
