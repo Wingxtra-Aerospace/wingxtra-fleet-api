@@ -84,7 +84,6 @@ This schema is the **contract** between:
 - `wingxtra-de-telemetry-plugin`
 - `wingxtra-fleet-api`
 
-```json
 {
   "schema_version": 1,
   "drone_id": "WX-DRN-001",
