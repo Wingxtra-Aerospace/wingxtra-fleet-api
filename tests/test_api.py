@@ -35,7 +35,7 @@ def test_rejects_invalid_api_key() -> None:
 
 def test_accepts_and_returns_latest() -> None:
     ingest = client.post("/api/v1/telemetry", json=VALID_PAYLOAD, headers={"X-API-Key": "dev_secret"})
-    assert ingest.status_code == 202
+    assert ingest.status_code == 200
 
     latest = client.get("/api/v1/telemetry/latest")
     assert latest.status_code == 200

@@ -74,6 +74,14 @@ It must never depend on DroneEngage internals.
 ### 3.4 Dashboard
 
 - Implemented at `GET /` (served from `app/static/index.html`)
+
+### 3.5 Partner fan-out
+- Telemetry ingestion fans out to configured partner endpoints after local storage.
+- Fan-out is asynchronous and must not block ingestion responses.
+- Admin endpoints:
+  - `GET /api/v1/fanout/targets`
+  - `GET /api/v1/fanout/health`
+
 - Simple, reliable map UI
 - Shows:
   - all drones
@@ -207,6 +215,11 @@ Optional:
 RATE_LIMIT_RPS=10
 LOG_LEVEL=INFO
 ALLOWED_ORIGINS=http://localhost:3000
+FANOUT_ENABLED=false
+FANOUT_TARGETS_JSON=[]
+FANOUT_TIMEOUT_SECONDS=2
+FANOUT_MAX_RETRIES=5
+FANOUT_RETRY_BACKOFF_SECONDS=2
 Run locally
 
 With Docker Compose (api + redis):
